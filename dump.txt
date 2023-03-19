@@ -1,0 +1,268 @@
+// int main(){
+// 	srand(time(0));
+
+// 	cout << "Welcome to the battle simulator!\n\n";
+// 	cout << "What Type of player do you want to play as ?  Wizard or Knight?";
+// 	string player_type;
+// 	cin >> player_type;
+
+// 	cout << "What's your character's name?";
+// 	string name;
+// 	cin >> name;
+
+// 	Player* player;
+
+// 	if (player_type == "Wizard"){
+// 		player = new Wizard(name);
+// 	}
+// 	else if (player_type == "Knight"){
+// 		player = new Knight(name);
+// 	}
+// 	else {
+//         cout << "Invalid player type. Exiting..." << endl;
+//         return 1;
+//     }
+// 	Enemy* enemy;
+
+// 	cout << player->GetName() << " has entered the battle" << endl;
+// 	// cout << player->GetName() << "has entered the battle";
+// 	return 0;
+// }
+
+cout << "What is your character name? ";
+string name;
+cin >> name;
+
+Player* player;
+
+// Create player object based on type
+if (player_type == "Wizard"){
+	player = new Wizard(name);
+	cout << "You have chosen to play as a Wizard." << endl;
+}
+else if (player_type == "Knight"){
+	player = new Knight(name);
+	cout << "You have chosen to play as a Knight." << endl;
+}
+else {
+	cout << "Invalid player type. Exiting..." << endl;
+	return 1;
+}
+
+// Display player information
+cout << "Player Information:" << endl;
+cout << "Name: " << player->GetName() << endl;
+cout << "Type: " << player_type << endl;
+cout << "Health: " << player->GetHealth() << endl;
+
+// Prompt user to start battle
+cout << "\nAre you ready to witness a battle? (Y/N) ";
+char ready;
+cin >> ready;
+
+if (ready != 'Y' && ready != 'y') {
+	cout << "Exiting game..." << endl;
+	return 1;
+}
+
+// Create enemy object randomly
+Enemy* enemy;
+int enemy_choice = rand() % 2;
+if (enemy_choice == 0) {
+	enemy = new Orc();
+	cout << "An Orc appears!" << endl;
+}
+else {
+	enemy = new Undead();
+	cout << "An Undead appears!" << endl;
+}
+
+// Display enemy information
+cout << "Enemy Information:" << endl;
+cout << "Name: " << enemy->GetSpeciesName() << endl;
+cout << "Health: " << enemy->GetHealth() << endl;
+
+// Battle sequence
+cout << "\nBattle Start!" << endl;
+
+// Enemy taunts player
+enemy->TauntPlayer();
+
+// Player performs normal attack
+player->NormalAttack();
+
+// Enemy taunts player
+enemy->TauntPlayer();
+
+// Player performs special attack
+player->SpecialAttack();
+
+// Enemy performs normal attack
+enemy->NormalAttack();
+
+// Enemy performs normal attack
+enemy->NormalAttack();
+
+// Player performs special attack
+player->SpecialAttack();
+
+// Enemy taunts player
+enemy->TauntPlayer();
+
+// Player performs special attack
+player->SpecialAttack();
+
+// Enemy dies
+enemy->SetHealth(0);
+cout << "\n" << enemy->GetSpeciesName() << " has been defeated!" << endl;
+
+// Win message
+cout << "Congratulations " << player->GetName() << ", you win!" << endl;
+
+return 0;
+// #include "Enemy.h"
+// #include <iostream>
+// using namespace std;
+
+// void Enemy::NormalAttack()
+// {
+// 	cout << "performs a normal attack ." << endl;
+// }
+
+// int Enemy::SetHealth(const int health)
+// {
+// 	Health = health;
+// }
+
+// #pragma once
+// #ifndef __ENEMY_H__
+// #define __ENEMY_H__
+
+// #include "GameObject.h"
+// #include <string>
+// #include <array>
+// using namespace std;
+
+// class Enemy : public GameObject
+// {
+// public:
+// 	Enemy(const string& name) :SpeciesName(name), Health(100){}
+// 	void NormalAttack() override;
+// 	virtual void TauntPlayer() = 0;
+
+// 	int SetHealth(const int health);
+
+// private:
+// 	int Health ;
+// 	string SpeciesName;
+// };
+
+// class Orc :public Enemy 
+// {
+// public:
+// 	static const string SpeciesName;
+//     array<string,1> Taunt {"You're nothing compared to my strength and power"};
+	
+// };
+
+// class Undead:public Enemy
+// {
+// public:
+// 	static const string SpeciesName;
+// 	array<string, 1> Taunt ={"Hahaha,You can't kill me !"};
+	
+// };
+
+
+
+// #endif
+
+
+
+// #include "Player.h"
+// #include "Enemy.h"
+// #include <iostream>
+// #include <string>
+// #include <cstdlib>
+// #include <ctime>
+// #include "GameObject.h"
+// using namespace std;
+
+// int main()
+// {
+//     srand(time(0));
+
+//     cout << "Welcome to the battle simulator!\n\n";
+//     cout << "What type of player do you want to play as? Wizard or Knight?";
+//     string player_type;
+//     cin >> player_type;
+
+//     cout << "What's your character's name?";
+//     string name;
+//     cin >> name;
+
+//     Player* player;
+
+//     if (player_type == "Wizard"){
+//         player = new Wizard(name);
+//     }
+//     else if (player_type == "Knight"){
+//         player = new Knight(name);
+//     }
+//     else {
+//         cout << "Invalid player type. Exiting..." << endl;
+//         return 1;
+//     }
+
+//     cout << "\nPlayer information:" << endl;
+//     cout << "Type: " << player_type << endl;
+//     cout << "Name: " << name << endl;
+//     cout << "Health: " << player->GetHealth() << endl;
+
+//     cout << "\nAre you ready to witness a battle? (yes or no)";
+//     string ready;
+//     cin >> ready;
+
+//     if (ready == "yes"){
+//         int enemy_choice = rand() % 2;
+//         Enemy* enemy;
+
+//         if (enemy_choice == 0){
+//             enemy = new Orc();
+//         }
+//         else {
+//             enemy = new Undead();
+//         }
+
+//         cout << "\nA " << enemy->GetSpeciesName() << " has entered the battle" << endl;
+//         cout << "Enemy health: " << enemy->GetHealth() << endl;
+
+//         while (player->GetHealth() > 0 && enemy->GetHealth() > 0){
+//             enemy->TauntPlayer();
+//             player->NormalAttack();
+//             enemy->TauntPlayer();
+//             player->SpecialAttack();
+//             enemy->NormalAttack();
+//             enemy->NormalAttack();
+//             player->SpecialAttack();
+//             enemy->TauntPlayer();
+//             player->SpecialAttack();
+//         }
+
+//         if (player->GetHealth() > 0){
+//             cout << "\nYou have won the battle! Congratulations!" << endl;
+//         }
+//         else {
+//             cout << "\nYou have lost the battle. Better luck next time." << endl;
+//         }
+
+//         delete enemy;
+//     }
+//     else {
+//         cout << "Exiting..." << endl;
+//     }
+
+//     delete player;
+
+//     return 0;
+// }

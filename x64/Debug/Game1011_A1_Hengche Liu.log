@@ -1,0 +1,6 @@
+﻿  Enemy.cpp
+C:\Users\Owner\source\repos\Game1011_A1_Hengche Liu\Game1011_A1_Hengche Liu\Enemy.cpp(12,9): warning C4244: “return”: 从“float”转换到“int”，可能丢失数据
+  Menu.cpp
+C:\Users\Owner\source\repos\Game1011_A1_Hengche Liu\Game1011_A1_Hengche Liu\Menu.cpp(13,12): warning C4244: “参数”: 从“time_t”转换到“unsigned int”，可能丢失数据
+  正在生成代码...
+C:\Users\Owner\source\repos\Game1011_A1_Hengche Liu\Game1011_A1_Hengche Liu\Enemy.cpp(18): error C4716: “Enemy::SetHealth”: 必须返回一个值
