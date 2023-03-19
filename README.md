@@ -1,3 +1,3 @@
 # Battle-Simulation-game
  
-![class diagram](img/dh.png)
+![class diagram](img/dp.png)
